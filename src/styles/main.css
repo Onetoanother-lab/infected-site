@@ -344,6 +344,16 @@ p {
   font-size: 0.38em;
 }
 
+/* the English term beside the Uzbek name, for the language half of the class */
+.stage-term {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--stage-accent);
+}
+
 .stage-body,
 .theatre {
   position: relative;
@@ -1267,6 +1277,15 @@ p {
   gap: 0.15rem;
 }
 
+.tracker-term {
+  display: block;
+  margin-top: 0.1rem;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
 .tracker-btn {
   width: 100%;
   display: grid;
@@ -1435,7 +1454,7 @@ p {
   }
 
   .tracker-title,
-  .bi-tracker {
+  .tracker-name {
     display: none;
   }
 

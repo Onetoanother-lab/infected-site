@@ -22,7 +22,12 @@ export function buildTracker(stages: Stage[], onJump: (stage: Stage) => void): T
       'button.tracker-btn',
       { type: 'button', 'data-stage': stage.id, 'data-state': 'pristine' },
       el('span.tracker-num', { 'aria-hidden': 'true' }, String(stage.order)),
-      bi(stage.name, 'span.bi.bi-tracker'),
+      el(
+        'span.tracker-name',
+        {},
+        bi(stage.name, 'span.bi.bi-tracker'),
+        el('span.tracker-term', { lang: 'en' }, lookup(`stages.${stage.id}.term`).en),
+      ),
       el('span.tracker-dot', { 'aria-hidden': 'true' }),
     );
     button.addEventListener('click', () => onJump(stage));

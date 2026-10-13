@@ -68,6 +68,8 @@ export const strings = {
   stages: {
     phishing: {
       name: { uz: 'Fishing', en: 'Phishing' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'phishing', en: 'phishing' },
       what: {
         uz: 'Ishonchli nom ostida yozilgan yolgʻon xabar. Maqsadi — havolani bosishingiz yoki maʼlumotingizni berishingiz.',
         en: 'A fake message that pretends to be someone you trust, so that you click a link or hand over information.',
@@ -125,6 +127,8 @@ export const strings = {
 
     pharming: {
       name: { uz: 'Farming', en: 'Pharming' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'pharming', en: 'pharming' },
       what: {
         uz: 'Manzilni toʻgʻri yozsangiz ham, yoʻnaltirish buzilgani uchun nusxa saytga tushasiz. Bu yerda bosish shart emas.',
         en: 'You type the right address, but tampering quietly sends you to a look-alike copy. No click is needed here.',
@@ -168,6 +172,8 @@ export const strings = {
     },
     vishing: {
       name: { uz: 'Ovozli fishing', en: 'Vishing' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'vishing', en: 'vishing' },
       what: {
         uz: 'Telefon orqali hujum: qoʻngʻiroq qiluvchi bank yoki yordam xizmati nomidan kod soʻraydi.',
         en: 'The phone-call version: a caller poses as your bank or support and asks for a code.',
@@ -227,6 +233,8 @@ export const strings = {
     },
     trojan: {
       name: { uz: 'Troyan', en: 'Trojan' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'trojan', en: 'trojan' },
       what: {
         uz: 'Foydali koʻrinadigan dastur ichiga yashiringan zararli kod.',
         en: 'Malware hidden inside something that looks useful.',
@@ -268,6 +276,8 @@ export const strings = {
     },
     worm: {
       name: { uz: 'Qurt', en: 'Worm' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'worm', en: 'worm' },
       what: {
         uz: 'Hech kim bosmasa ham tarmoq boʻylab oʻzini oʻzi koʻchiradigan zararli dastur.',
         en: 'Malware that copies itself across a network with nobody clicking.',
@@ -304,6 +314,8 @@ export const strings = {
     },
     spyware: {
       name: { uz: 'Josuslik dasturi', en: 'Spyware' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'spyware', en: 'spyware' },
       what: {
         uz: 'Nima qilganingizni yashirin kuzatib, maʼlumotni chetga uzatadigan dastur.',
         en: 'Software that secretly watches what you do and reports it back.',
@@ -347,6 +359,8 @@ export const strings = {
     },
     rootkit: {
       name: { uz: 'Rutkit', en: 'Rootkit' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'rootkit', en: 'rootkit' },
       what: {
         uz: 'Tizim ichiga chuqur yashiringan va tekshiruv dasturlariga yolgʻon koʻrsatadigan zararli dastur.',
         en: 'Malware that buries itself deep in the system and lies to the tools looking for it.',
@@ -387,6 +401,8 @@ export const strings = {
     },
     adware: {
       name: { uz: 'Reklama dasturi', en: 'Adware' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'adware', en: 'adware' },
       what: {
         uz: 'Reklamani toʻxtovsiz koʻrsatadigan, baʼzan yonida battarini olib keladigan dastur.',
         en: 'Software that floods you with ads, sometimes bundling worse things.',
@@ -422,6 +438,8 @@ export const strings = {
     },
     ransomware: {
       name: { uz: 'Toʻlov talab qiluvchi dastur', en: 'Ransomware' },
+      // the English term the class is learning, shown next to the name
+      term: { uz: 'ransomware', en: 'ransomware' },
       what: {
         uz: 'Fayllaringizni qulflab, ochish uchun pul talab qiladigan zararli dastur.',
         en: 'Malware that locks your files and demands payment to release them.',

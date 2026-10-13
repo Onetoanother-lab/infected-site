@@ -80,7 +80,12 @@ export function buildSection(stage: Stage, total: number): SectionParts {
       'header.stage-head',
       {},
       bi(count, 'p.stage-count'),
-      el('h2.stage-title', { id: `stage-${stage.id}-title` }, bi(stage.name, 'span.bi.bi-title')),
+      el(
+        'h2.stage-title',
+        { id: `stage-${stage.id}-title` },
+        bi(stage.name, 'span.bi.bi-title'),
+        el('span.stage-term', { lang: 'en' }, `(${lookup(`stages.${stage.id}.term`).en})`),
+      ),
     ),
     el('div.theatre', {}, demo),
     el('div.beats', {}, explain, defend),
