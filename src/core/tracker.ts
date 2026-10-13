@@ -27,13 +27,13 @@ export function buildTracker(stages: Stage[], onJump: (stage: Stage) => void): T
     );
     button.addEventListener('click', () => onJump(stage));
     const row = el('li.tracker-row', {}, button);
-    rows.set(stage.id, { button, name: stage.name.en });
+    rows.set(stage.id, { button, name: stage.name.uz });
     list.append(row);
   }
 
   const element = el(
     'nav.tracker',
-    { 'aria-label': lookup('ui.trackerTitle').en },
+    { 'aria-label': lookup('ui.trackerTitle').uz },
     bi(lookup('ui.trackerTitle'), 'h2.tracker-title'),
     list,
   );
@@ -52,8 +52,8 @@ export function buildTracker(stages: Stage[], onJump: (stage: Stage) => void): T
       if (!row) return;
       row.button.dataset.state = state;
       const label = stateLabel(state);
-      row.button.setAttribute('aria-label', `${row.name} — ${label.en}`);
-      row.button.title = `${label.uz} / ${label.en}`;
+      row.button.setAttribute('aria-label', `${row.name} — ${label.uz}`);
+      row.button.title = label.uz;
     },
     setActive(id) {
       for (const [stageId, row] of rows) {

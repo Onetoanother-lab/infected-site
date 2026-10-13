@@ -14,7 +14,7 @@ import { stages } from './stages';
 const forced = new URLSearchParams(window.location.search).has('reduced');
 const reduced = forced || prefersReducedMotion();
 document.documentElement.dataset.reducedMotion = String(reduced);
-document.title = `${lookup('ui.siteTitle').uz} — ${lookup('ui.siteTitle').en}`;
+document.title = lookup('ui.siteTitle').uz;
 
 const app = document.querySelector<HTMLElement>('#app');
 if (!app) throw new Error('#app is missing from index.html');

@@ -32,6 +32,7 @@ export function mountStages(
 ): Engine {
   const mounted = new Map<StageId, Mounted>();
 
+
   for (const stage of stages) {
     const parts = buildSection(stage, stages.length);
     host.append(parts.section);

@@ -28,7 +28,7 @@ export function buildSection(stage: Stage, total: number): SectionParts {
   const demo = el('div.theatre-box', {
     'data-demo': stage.id,
     role: 'group',
-    'aria-label': `${stage.name.en} demo`,
+    'aria-label': stage.name.uz,
   });
 
   const redFlag = tryLookup(`stages.${stage.id}.redFlag`);
@@ -75,6 +75,7 @@ export function buildSection(stage: Stage, total: number): SectionParts {
       'aria-labelledby': `stage-${stage.id}-title`,
       tabindex: '-1',
     },
+    el('span.stage-ghost', { 'aria-hidden': 'true' }, String(stage.order)),
     el(
       'header.stage-head',
       {},

@@ -4,14 +4,14 @@
    --------------------------------------------------------------------------- */
 
 :root {
-  --paper: #f4f1ea;
-  --paper-raised: #fbf9f5;
-  --ink: #17191e;
-  --muted: #6d6a63;
-  --line: rgba(23, 25, 30, 0.14);
-  --calm: #275d62;
-  --infect: #b11f38;
-  --shadow: 0 1px 2px rgba(23, 25, 30, 0.05), 0 12px 32px -18px rgba(23, 25, 30, 0.35);
+  --paper: #0e1014;
+  --paper-raised: #171a21;
+  --ink: #f2efe9;
+  --muted: #989389;
+  --line: rgba(242, 239, 233, 0.16);
+  --calm: #5bb3a6;
+  --infect: #e2415e;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 50px -28px rgba(0, 0, 0, 0.8);
 
   --display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, ui-serif, serif;
   --body: ui-sans-serif, 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
@@ -19,6 +19,8 @@
 
   --rail: 15rem;
   --measure: 34rem;
+  --gutter: clamp(1.25rem, 6vw, 7rem);
+  --gutter-right: calc(var(--rail) + clamp(1.5rem, 4vw, 4rem));
 }
 
 *,
@@ -29,6 +31,8 @@
 
 html {
   scroll-behavior: auto;
+  /* the full-bleed stage backgrounds reach past the column; never scroll sideways */
+  overflow-x: clip;
 }
 
 body {
@@ -113,19 +117,52 @@ p {
 
 .acts {
   display: block;
-  padding-inline: clamp(1.25rem, 5vw, 6rem);
-  padding-right: calc(var(--rail) + clamp(1.5rem, 4vw, 4rem));
-  max-width: 96rem;
-  margin-inline: auto;
+}
+
+.intro,
+.stage,
+.outro {
+  padding-left: var(--gutter);
+  padding-right: var(--gutter-right);
 }
 
 /* --- intro ---------------------------------------------------------------- */
 
 .intro {
+  position: relative;
   min-height: 100svh;
   display: grid;
   align-content: center;
   padding-block: 12vh;
+  overflow: clip;
+}
+
+/* a slow, calm aura — the last quiet thing before the first infection */
+.intro::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: min(52rem, 70vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--calm) 16%, transparent), transparent 62%);
+  filter: blur(10px);
+  animation: aura-drift 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes aura-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-4%, 5%, 0) scale(1.08);
+  }
+}
+
+.intro-inner {
+  position: relative;
 }
 
 .intro-inner {
@@ -221,12 +258,50 @@ p {
   --stage-accent: var(--calm);
   position: relative;
   padding-block: 14vh;
-  padding-inline: clamp(1rem, 2vw, 2.5rem);
-  margin-inline: clamp(-2.5rem, -2vw, -1rem);
   border-top: 1px solid var(--line);
+  overflow: clip;
   transition:
-    background-color 600ms ease,
-    color 600ms ease;
+    background-color 700ms ease,
+    color 700ms ease;
+}
+
+/* the texture layer: a faint grid and a glow that only the infected act shows */
+.stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  background-image:
+    radial-gradient(60% 50% at 70% 10%, rgba(177, 31, 56, 0.22), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    100% 2.5rem,
+    2.5rem 100%;
+  transition: opacity 700ms ease;
+  pointer-events: none;
+}
+
+.stage > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* the threat number, large and quiet, behind the heading */
+.stage-ghost {
+  position: absolute;
+  top: 6vh;
+  right: 0.5rem;
+  z-index: 0;
+  font-family: var(--display);
+  font-size: clamp(9rem, 22vw, 20rem);
+  line-height: 0.8;
+  color: color-mix(in srgb, var(--ink) 7%, transparent);
+  pointer-events: none;
+  user-select: none;
+  transition: color 700ms ease;
 }
 
 .stage:focus {
@@ -271,6 +346,7 @@ p {
 
 .theatre-box {
   position: relative;
+  max-width: 68rem;
   min-height: 24rem;
   padding: clamp(1.25rem, 2.5vw, 2.25rem);
   border: 1px solid var(--line);
@@ -351,11 +427,20 @@ p {
 
 .stage.is-infected {
   --stage-accent: var(--infect);
-  --paper-raised: #1d2027;
-  --line: rgba(255, 255, 255, 0.14);
-  --muted: #9b9790;
-  background: #14161b;
-  color: #f2efe9;
+  --paper-raised: #16181e;
+  background-color: #000000;
+}
+
+.stage.is-infected::before {
+  opacity: 1;
+}
+
+.stage.is-infected .stage-ghost {
+  color: color-mix(in srgb, var(--infect) 16%, transparent);
+}
+
+.stage.is-infected .stage-title {
+  text-shadow: 0 0 26px rgba(226, 65, 94, 0.4);
 }
 
 .stage.is-infected .theatre-box {
@@ -364,7 +449,14 @@ p {
 
 .stage.is-secured {
   --stage-accent: var(--calm);
-  background: color-mix(in srgb, var(--calm) 5%, var(--paper));
+}
+
+.stage.is-secured {
+  background-color: color-mix(in srgb, var(--calm) 9%, var(--paper));
+}
+
+.stage.is-secured .stage-ghost {
+  color: color-mix(in srgb, var(--calm) 14%, transparent);
 }
 
 /* --- placeholder stages (Phase A replaces these) -------------------------- */
@@ -416,7 +508,7 @@ p {
   padding: 1rem 1.1rem;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--paper-raised) 94%, var(--ink));
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
   transition:
     border-color 300ms ease,
     opacity 400ms ease;
@@ -613,6 +705,274 @@ p {
   pointer-events: none;
 }
 
+/* --- pharming stage ------------------------------------------------------- */
+
+.pharm-title {
+  font-size: 1.3rem;
+}
+
+.pharm-hint {
+  margin-top: 0.6rem;
+  max-width: 32rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.pharm-bar {
+  margin-top: 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.pharm-bar-lock {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: var(--calm);
+  transition: background-color 400ms ease;
+}
+
+.is-poisoned .pharm-bar-lock {
+  background: var(--infect);
+}
+
+.pharm-wire {
+  position: relative;
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.pharm-book,
+.pharm-server {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+}
+
+.pharm-panel-title .bi-uz {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pharm-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--line);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+.pharm-row:last-child {
+  border-bottom: 0;
+}
+
+.pharm-row:first-of-type {
+  margin-top: 0.6rem;
+}
+
+.pharm-row-arrow {
+  color: var(--muted);
+}
+
+.pharm-row-ip {
+  color: var(--calm);
+}
+
+.is-poisoned .pharm-row[data-primary='true'] {
+  background: color-mix(in srgb, var(--infect) 12%, transparent);
+  box-shadow: inset 2px 0 0 var(--infect);
+  padding-left: 0.5rem;
+}
+
+.is-poisoned .pharm-row[data-primary='true'] .pharm-row-ip {
+  color: var(--infect);
+}
+
+.pharm-packet {
+  position: absolute;
+  left: 1.5rem;
+  bottom: -0.9rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--calm);
+  opacity: 0;
+}
+
+.is-poisoned .pharm-packet {
+  background: var(--infect);
+}
+
+.pharm-server-name {
+  margin-top: 0.8rem;
+  font-family: var(--display);
+  font-size: 1.05rem;
+}
+
+.is-poisoned .pharm-server-name {
+  color: var(--infect);
+}
+
+.pharm-page {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+}
+
+.pharm-page-title .bi-uz {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pharm-site {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.7rem 0.9rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--calm) 10%, transparent);
+  transition:
+    background-color 500ms ease,
+    transform 500ms ease;
+}
+
+.is-poisoned .pharm-site {
+  background: color-mix(in srgb, var(--infect) 10%, transparent);
+  transform: skewX(-0.6deg);
+}
+
+.pharm-logo {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: var(--calm);
+  color: #07100f;
+  font-family: var(--display);
+  font-size: 1.2rem;
+  transition:
+    background-color 500ms ease,
+    transform 500ms ease;
+}
+
+.is-poisoned .pharm-logo {
+  background: var(--infect);
+  color: #1a0509;
+  transform: rotate(-6deg);
+}
+
+.pharm-brand {
+  font-family: var(--display);
+  font-size: 1.15rem;
+}
+
+.pharm-fields {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.pharm-field {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.pharm-field-label .bi-uz {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.pharm-field-bar {
+  height: 1.6rem;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.pharm-cert {
+  margin-top: 0.9rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--infect);
+  border-left-width: 3px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--infect) 10%, transparent);
+}
+
+.pharm-cert .bi-uz {
+  font-size: 0.9rem;
+  color: var(--infect);
+}
+
+.pharm-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.pharm-retry {
+  appearance: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.pharm-retry:hover {
+  border-color: var(--calm);
+  background: color-mix(in srgb, var(--calm) 10%, transparent);
+}
+
+.pharm-note .bi-uz,
+.pharm-mock-note .bi-uz {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.pharm-mock-note {
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--line);
+}
+
+@media (max-width: 48rem) {
+  .pharm-wire {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* --- tracker rail --------------------------------------------------------- */
 
 .tracker {
@@ -624,8 +984,8 @@ p {
   padding: 1rem 0.9rem;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: color-mix(in srgb, var(--paper) 86%, transparent);
-  backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
   z-index: 20;
 }
 
@@ -668,11 +1028,11 @@ p {
 }
 
 .tracker-btn:hover {
-  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  background: rgba(242, 239, 233, 0.07);
 }
 
 .tracker-btn[data-active='true'] {
-  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  background: rgba(242, 239, 233, 0.11);
 }
 
 .tracker-num {
@@ -717,7 +1077,7 @@ p {
   inset: 0;
   display: grid;
   place-items: center;
-  background: color-mix(in srgb, #14161b 70%, transparent);
+  background: rgba(0, 0, 0, 0.72);
   z-index: 40;
 }
 

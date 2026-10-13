@@ -21,7 +21,7 @@ export function initPresenter(
 
   const overlay = el(
     'div.presenter',
-    { role: 'dialog', 'aria-modal': 'false', 'aria-label': ui('presenterTitle').en, hidden: true },
+    { role: 'dialog', 'aria-modal': 'false', 'aria-label': ui('presenterTitle').uz, hidden: true },
     el(
       'div.presenter-card',
       {},
@@ -73,7 +73,7 @@ export function initPresenter(
     if (event.key === 'r' || event.key === 'R') {
       event.preventDefault();
       onReset();
-      flash(`${ui('resetDone').uz} / ${ui('resetDone').en}`);
+      flash(ui('resetDone').uz);
       return;
     }
     if (event.key === '?' || (event.key === '/' && event.shiftKey)) {

@@ -126,9 +126,45 @@ export const strings = {
     pharming: {
       name: { uz: 'Farming', en: 'Pharming' },
       what: {
-        uz: 'Manzilni toʻgʻri yozsangiz ham, yoʻnaltirish buzilgani uchun nusxa saytga tushasiz.',
-        en: 'You type the right address, but tampering quietly sends you to a look-alike copy.',
+        uz: 'Manzilni toʻgʻri yozsangiz ham, yoʻnaltirish buzilgani uchun nusxa saytga tushasiz. Bu yerda bosish shart emas.',
+        en: 'You type the right address, but tampering quietly sends you to a look-alike copy. No click is needed here.',
       },
+      redFlag: {
+        uz: 'Hammasini toʻgʻri qildingiz, lekin sayt boshqacha: sertifikat ogohlantirishi, gʻalati tus, oʻzgargan tugmalar.',
+        en: 'You did everything right and the site is still off: a certificate warning, odd colours, buttons that moved.',
+      },
+      defense: {
+        uz: 'Sertifikat va HTTPS ogohlantirishini hech qachon oʻtkazib yubormang. Qurilma va routerni yangilab turing. Ishonchli tarmoqdan kiring.',
+        en: 'Never click past a certificate or HTTPS warning. Keep your device and router updated. Use networks you trust.',
+      },
+      example: {
+        uz: '«namuna-bank.xyz — manzil toʻgʻri, lekin brauzer “sertifikat ishonchsiz” deydi va sahifa rangi boshqacha.»',
+        en: '"namuna-bank.xyz — the address is right, but the browser says the certificate is untrusted and the page looks different."',
+      },
+      address: { uz: 'namuna-bank.xyz', en: 'namuna-bank.xyz' },
+      demoTitle: { uz: 'Manzil toʻgʻri, sayt notoʻgʻri', en: 'Right address, wrong site' },
+      demoHint: {
+        uz: 'Brauzer manzilni raqamga aylantiradi. Shu jadval buzilsa, siz nusxaga tushasiz.',
+        en: 'The browser turns the address into a number. Tamper with that table and you land on the copy.',
+      },
+      bookLabel: { uz: 'Manzillar jadvali', en: 'Address table' },
+      serverLabel: { uz: 'Qaysi serverga boradi', en: 'Where it goes' },
+      serverReal: { uz: 'Bank serveri', en: 'Bank server' },
+      serverFake: { uz: 'Firibgar serveri', en: 'Attacker server' },
+      pageReal: { uz: 'Namuna Bank — haqiqiy sahifa', en: 'Namuna Bank — the real page' },
+      pageClone: { uz: 'Namuna Bank — nusxa sahifa', en: 'Namuna Bank — the copy' },
+      certWarn: { uz: 'Sertifikat ishonchsiz', en: 'Certificate not trusted' },
+      retry: { uz: 'Manzilni qayta yozish', en: 'Type the address again' },
+      retryNote: {
+        uz: 'Qayta yozish yordam bermaydi: jadval buzilgan boʻlsa, natija oʻsha.',
+        en: 'Retyping does not help: while the table is poisoned, the result is the same.',
+      },
+      mockNote: {
+        uz: 'Bu soxta kirish oynasi — darsning bir qismi. Bu yerda hech narsa yozilmaydi va yuborilmaydi.',
+        en: 'This login box is a prop for the lesson. Nothing can be typed here and nothing is sent.',
+      },
+      mockUser: { uz: 'Login', en: 'Username' },
+      mockPass: { uz: 'Parol', en: 'Password' },
     },
     vishing: {
       name: { uz: 'Ovozli fishing', en: 'Vishing' },

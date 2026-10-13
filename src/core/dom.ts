@@ -24,15 +24,19 @@ export function el<K extends keyof HTMLElementTagNameMap>(
 }
 
 /**
- * Bilingual text block: Uzbek leads, English sits under it. Both languages are
- * always rendered together — the site has no language switch.
+ * The site shows Uzbek only. Every string still carries its English twin in
+ * strings.ts, so turning this to true brings the second language back
+ * everywhere at once.
  */
+const SHOW_ENGLISH = false;
+
+/** Text block. Uzbek leads; English renders under it only when switched on. */
 export function bi(text: Localized, spec = 'div.bi'): HTMLElement {
   return el(
     spec,
     {},
     el('span.bi-uz', { lang: 'uz' }, text.uz),
-    el('span.bi-en', { lang: 'en' }, text.en),
+    SHOW_ENGLISH ? el('span.bi-en', { lang: 'en' }, text.en) : null,
   );
 }
 
