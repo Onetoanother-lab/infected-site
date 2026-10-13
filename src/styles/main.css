@@ -29,6 +29,11 @@
   box-sizing: border-box;
 }
 
+/* a layout display value must never beat the hidden attribute */
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: auto;
   /* the full-bleed stage backgrounds reach past the column; never scroll sideways */
