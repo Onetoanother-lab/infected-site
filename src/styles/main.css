@@ -973,6 +973,258 @@ p {
   }
 }
 
+/* --- vishing stage -------------------------------------------------------- */
+
+.vish-title {
+  font-size: 1.3rem;
+}
+
+.vish-hint {
+  margin-top: 0.6rem;
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.vish-phone {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+  transition:
+    border-color 400ms ease,
+    background-color 400ms ease;
+}
+
+.vish-phone.is-ringing {
+  border-color: color-mix(in srgb, var(--infect) 45%, transparent);
+}
+
+.vish-phone.is-live {
+  border-color: var(--infect);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--infect) 35%, transparent);
+}
+
+.vish-phone.is-safe {
+  border-color: var(--calm);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--calm) 35%, transparent);
+}
+
+.vish-caller {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.vish-avatar {
+  position: relative;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--infect) 20%, transparent);
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--infect) 40%, transparent);
+}
+
+.is-ringing .vish-avatar {
+  animation: vish-pulse 1.4s ease-out infinite;
+}
+
+.is-safe .vish-avatar {
+  background: color-mix(in srgb, var(--calm) 22%, transparent);
+  animation: none;
+}
+
+@keyframes vish-pulse {
+  from {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--infect) 45%, transparent);
+  }
+  to {
+    box-shadow: 0 0 0 0.9rem rgba(0, 0, 0, 0);
+  }
+}
+
+.vish-caller-name .bi-uz {
+  font-size: 0.84rem;
+  letter-spacing: 0.1em;
+}
+
+.vish-caller-num {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.vish-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.vish-status .bi-uz {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.vish-timer {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+}
+
+.vish-body {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  align-items: start;
+}
+
+.vish-script {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.vish-line {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 12px 12px 12px 4px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+  opacity: 0.25;
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease;
+}
+
+.vish-line[data-said='true'] {
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--infect) 40%, var(--line));
+}
+
+.vish-line-text .bi-uz {
+  font-size: 0.95rem;
+}
+
+.vish-flags {
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper-raised) 92%, #000000);
+}
+
+.vish-flags-title .bi-uz {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.vish-flag-list {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.vish-flag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  opacity: 0.35;
+  transition:
+    opacity 300ms ease,
+    border-color 300ms ease,
+    color 300ms ease;
+}
+
+.vish-flag::before {
+  content: '';
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.vish-flag[data-lit='true'] {
+  opacity: 1;
+  color: var(--infect);
+  border-color: color-mix(in srgb, var(--infect) 50%, transparent);
+}
+
+.vish-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.vish-btn {
+  appearance: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.vish-btn:hover {
+  border-color: var(--infect);
+  background: color-mix(in srgb, var(--infect) 10%, transparent);
+}
+
+.vish-btn-hangup:hover {
+  border-color: var(--calm);
+  background: color-mix(in srgb, var(--calm) 12%, transparent);
+}
+
+.vish-outcome {
+  margin-top: 1.25rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--calm);
+  border-left-width: 3px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--calm) 10%, transparent);
+}
+
+.vish-outcome-title .bi-uz {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--calm);
+}
+
+.vish-outcome-text {
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 48rem) {
+  .vish-body {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* --- tracker rail --------------------------------------------------------- */
 
 .tracker {

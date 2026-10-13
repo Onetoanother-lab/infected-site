@@ -172,6 +172,58 @@ export const strings = {
         uz: 'Telefon orqali hujum: qoʻngʻiroq qiluvchi bank yoki yordam xizmati nomidan kod soʻraydi.',
         en: 'The phone-call version: a caller poses as your bank or support and asks for a code.',
       },
+      redFlag: {
+        uz: 'Kutilmagan qoʻngʻiroq bir martalik kod, parol yoki masofaviy kirish soʻraydi. Shoshiltiradi va «hech kimga aytmang» deydi.',
+        en: 'An inbound call asks for a one-time code, a password or remote access. It rushes you and asks you to keep quiet.',
+      },
+      defense: {
+        uz: 'Goʻshakni qoʻying. Raqamni oʻzingiz tering: karta orqasidagi yoki rasmiy ilovadagi raqam. Bank bir martalik kodni hech qachon soʻramaydi.',
+        en: 'Hang up. Dial the number yourself — the one on the back of your card or in the official app. A bank never asks for your one-time code.',
+      },
+      example: {
+        uz: '«Xavfsizlik xizmati» deb qoʻngʻiroq qiladi, SMSdagi kodni aytishni soʻraydi va liniyada qolishni talab qiladi.',
+        en: 'A caller says they are "the security team", asks you to read out the code from the SMS and to stay on the line.',
+      },
+      demoTitle: { uz: 'Qoʻngʻiroqni eshiting va belgilarni toping', en: 'Listen to the call and spot the signs' },
+      demoHint: {
+        uz: 'Bu sahna — matn bilan koʻrsatiladi. Mikrofon ishlatilmaydi, hech narsa yozilmaydi va yuborilmaydi.',
+        en: 'This scene is played as text. No microphone is used, nothing is recorded and nothing is sent.',
+      },
+      callerName: { uz: 'NAMUNA BANK — XAVFSIZLIK', en: 'NAMUNA BANK — SECURITY' },
+      callerNumber: { uz: '+000 00 123-45-67', en: '+000 00 123-45-67' },
+      statusIncoming: { uz: 'Kiruvchi qoʻngʻiroq', en: 'Incoming call' },
+      statusLive: { uz: 'Suhbat davom etmoqda', en: 'Call in progress' },
+      statusEnded: { uz: 'Qoʻngʻiroq tugadi', en: 'Call ended' },
+      statusCallback: { uz: 'Siz oʻzingiz qoʻngʻiroq qildingiz', en: 'You called back yourself' },
+      callbackName: { uz: 'KARTA ORQASIDAGI RAQAM', en: 'THE NUMBER ON YOUR CARD' },
+      replay: { uz: 'Qoʻngʻiroqni qayta eshitish', en: 'Play the call again' },
+      hangup: { uz: 'Goʻshakni qoʻyish', en: 'Hang up' },
+      line1: {
+        uz: '«Bankdan qoʻngʻiroq qilyapmiz. Hisobingizda shubhali amaliyot.»',
+        en: '"We are calling from the bank. There is suspicious activity on your account."',
+      },
+      flag1: { uz: 'Kutilmagan qoʻngʻiroq', en: 'An unexpected call' },
+      line2: {
+        uz: '«Pul yechilishini hozir toʻxtatamiz. Vaqt kam.»',
+        en: '"We can stop the withdrawal right now. There is no time."',
+      },
+      flag2: { uz: 'Shoshiltirish', en: 'Urgency' },
+      line3: {
+        uz: '«Hech kimga aytmang va liniyada qoling.»',
+        en: '"Do not tell anyone and stay on the line."',
+      },
+      flag3: { uz: 'Sir saqlashni talab qilish', en: 'Demanding secrecy' },
+      line4: {
+        uz: '«SMSdagi bir martalik kodni ayting.»',
+        en: '"Read out the one-time code from the SMS."',
+      },
+      flag4: { uz: 'Bir martalik kod soʻrash', en: 'Asking for a one-time code' },
+      flagsTitle: { uz: 'Ogohlantiruvchi belgilar', en: 'Warning signs' },
+      outcomeTitle: { uz: 'Toʻgʻri javob', en: 'The right answer' },
+      outcome: {
+        uz: 'Goʻshakni qoʻydingiz va raqamni oʻzingiz terdingiz. Kod faqat sizda qoldi.',
+        en: 'You hung up and dialled the number yourself. The code stayed with you.',
+      },
     },
     trojan: {
       name: { uz: 'Troyan', en: 'Trojan' },
