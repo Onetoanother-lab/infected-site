@@ -1,0 +1,857 @@
+/* ---------------------------------------------------------------------------
+   The calm act. Warm paper, ink type, one quiet accent. The infected act only
+   swaps these variables, so the whole page can turn without restyling parts.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --paper: #f4f1ea;
+  --paper-raised: #fbf9f5;
+  --ink: #17191e;
+  --muted: #6d6a63;
+  --line: rgba(23, 25, 30, 0.14);
+  --calm: #275d62;
+  --infect: #b11f38;
+  --shadow: 0 1px 2px rgba(23, 25, 30, 0.05), 0 12px 32px -18px rgba(23, 25, 30, 0.35);
+
+  --display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, ui-serif, serif;
+  --body: ui-sans-serif, 'Segoe UI Variable Text', 'Segoe UI', system-ui, sans-serif;
+  --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+
+  --rail: 15rem;
+  --measure: 34rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1rem, 0.55vw + 0.88rem, 1.12rem);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--calm);
+  outline-offset: 3px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* --- bilingual pairs: Uzbek leads, English sits under it ------------------- */
+
+.bi {
+  display: block;
+}
+
+.bi-uz {
+  display: block;
+}
+
+.bi-en {
+  display: block;
+  font-family: var(--body);
+  font-size: 0.78em;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  color: var(--muted);
+  margin-top: 0.25em;
+}
+
+.bi-inline {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.bi-inline .bi-en {
+  margin-top: 0.1em;
+  font-size: 0.72em;
+}
+
+.bi-label .bi-uz,
+.bi-label .bi-en {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.bi-label .bi-en {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+}
+
+/* --- layout --------------------------------------------------------------- */
+
+#app {
+  position: relative;
+}
+
+.acts {
+  display: block;
+  padding-inline: clamp(1.25rem, 5vw, 6rem);
+  padding-right: calc(var(--rail) + clamp(1.5rem, 4vw, 4rem));
+  max-width: 96rem;
+  margin-inline: auto;
+}
+
+/* --- intro ---------------------------------------------------------------- */
+
+.intro {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding-block: 12vh;
+}
+
+.intro-inner {
+  max-width: 44rem;
+}
+
+.intro-kicker .bi-uz {
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--calm);
+}
+
+.intro-kicker .bi-en {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.intro-title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
+}
+
+.intro-title .bi-en {
+  font-size: 0.34em;
+  max-width: 30rem;
+  margin-top: 0.8rem;
+}
+
+.intro-lead {
+  margin-top: 2rem;
+  max-width: var(--measure);
+}
+
+.intro-promise {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  max-width: var(--measure);
+}
+
+.intro-promise .bi-uz {
+  font-family: var(--display);
+  font-size: 1.15rem;
+}
+
+.intro-notice {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--calm);
+  background: var(--paper-raised);
+  max-width: var(--measure);
+}
+
+.intro-hint {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--muted);
+}
+
+.intro-hint .bi-uz {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.intro-hint-line {
+  display: block;
+  width: 4rem;
+  height: 1px;
+  background: currentColor;
+  animation: hint-slide 2.4s ease-in-out infinite;
+}
+
+@keyframes hint-slide {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+/* --- a stage -------------------------------------------------------------- */
+
+.stage {
+  --stage-accent: var(--calm);
+  position: relative;
+  padding-block: 14vh;
+  padding-inline: clamp(1rem, 2vw, 2.5rem);
+  margin-inline: clamp(-2.5rem, -2vw, -1rem);
+  border-top: 1px solid var(--line);
+  transition:
+    background-color 600ms ease,
+    color 600ms ease;
+}
+
+.stage:focus {
+  outline: none;
+}
+
+.stage-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stage-count .bi-uz {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--stage-accent);
+}
+
+.stage-count .bi-en {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.stage-title {
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+}
+
+.stage-title .bi-en {
+  font-size: 0.38em;
+}
+
+.stage-body,
+.theatre {
+  position: relative;
+}
+
+.theatre-box {
+  position: relative;
+  min-height: 24rem;
+  padding: clamp(1.25rem, 2.5vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-raised);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.beats {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  align-items: start;
+}
+
+.beat {
+  max-width: var(--measure);
+}
+
+.beat-label {
+  margin-bottom: 0.7rem;
+  color: var(--muted);
+}
+
+.beat-label-flag .bi-uz {
+  color: var(--infect);
+}
+
+.beat-label-shield .bi-uz {
+  color: var(--calm);
+}
+
+.beat-text .bi-uz {
+  font-family: var(--display);
+  font-size: 1.12rem;
+  line-height: 1.4;
+}
+
+.flag {
+  margin-top: 1.75rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--infect);
+}
+
+.example {
+  margin: 1.75rem 0 0;
+}
+
+.example-quote {
+  margin: 0;
+  padding: 1rem 1.15rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.example-quote .bi-uz {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.example-quote .bi-en {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+
+.beat-defend {
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--calm) 6%, var(--paper-raised));
+}
+
+/* the infected act: the section itself turns */
+
+.stage.is-infected {
+  --stage-accent: var(--infect);
+  --paper-raised: #1d2027;
+  --line: rgba(255, 255, 255, 0.14);
+  --muted: #9b9790;
+  background: #14161b;
+  color: #f2efe9;
+}
+
+.stage.is-infected .theatre-box {
+  box-shadow: 0 0 0 1px rgba(177, 31, 56, 0.35), 0 24px 60px -30px rgba(177, 31, 56, 0.5);
+}
+
+.stage.is-secured {
+  --stage-accent: var(--calm);
+  background: color-mix(in srgb, var(--calm) 5%, var(--paper));
+}
+
+/* --- placeholder stages (Phase A replaces these) -------------------------- */
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  margin: 1.25rem;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--line);
+  border-radius: 10px;
+}
+
+.placeholder-num {
+  font-family: var(--display);
+  font-size: clamp(4rem, 12vw, 9rem);
+  color: var(--line);
+}
+
+/* --- phishing stage ------------------------------------------------------- */
+
+.phish {
+  position: relative;
+}
+
+.phish-demo-title {
+  font-size: 1.3rem;
+}
+
+.phish-demo-hint {
+  margin-top: 0.6rem;
+  max-width: 28rem;
+}
+
+.phish-demo-hint .bi-uz {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.phish-inbox {
+  margin-top: 1.75rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.phish-msg {
+  position: relative;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--paper-raised) 94%, var(--ink));
+  transition:
+    border-color 300ms ease,
+    opacity 400ms ease;
+}
+
+.phish-msg.is-right {
+  border-color: var(--calm);
+}
+
+.phish-msg.is-wrong {
+  border-color: var(--infect);
+}
+
+.phish-msg-head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.phish-avatar {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--calm) 18%, transparent);
+  color: var(--calm);
+  font-family: var(--display);
+  font-size: 1rem;
+}
+
+.bi-from .bi-uz {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.phish-body {
+  margin-top: 0.7rem;
+}
+
+.phish-body .bi-uz {
+  font-size: 0.98rem;
+}
+
+.phish-urgency {
+  margin-top: 0.8rem;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.phish-urgency-fill {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--infect);
+}
+
+.phish-actions {
+  margin-top: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.phish-btn {
+  appearance: none;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.phish-btn:hover:not(:disabled) {
+  border-color: var(--calm);
+  background: color-mix(in srgb, var(--calm) 8%, transparent);
+}
+
+.phish-btn-scam:hover:not(:disabled) {
+  border-color: var(--infect);
+  background: color-mix(in srgb, var(--infect) 8%, transparent);
+}
+
+.phish-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.verdict-mark .bi-uz {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.is-right .verdict-mark .bi-uz {
+  color: var(--calm);
+}
+
+.is-wrong .verdict-mark .bi-uz {
+  color: var(--infect);
+}
+
+.phish-why {
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed var(--line);
+}
+
+.phish-why .bi-uz {
+  font-size: 0.9rem;
+}
+
+.phish-score {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.phish-score-label .bi-uz {
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.phish-score-label .bi-en {
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.phish-score-value {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+}
+
+.phish-hook {
+  position: absolute;
+  top: 0;
+  right: 2.5rem;
+  width: 2px;
+  height: 11rem;
+  transform: translateY(-120%);
+  background: linear-gradient(to bottom, transparent, var(--infect));
+  pointer-events: none;
+}
+
+.phish-hook-barb {
+  position: absolute;
+  bottom: -0.1rem;
+  left: -0.55rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 2px solid var(--infect);
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-radius: 0 0 0 999px;
+}
+
+.phish-loot {
+  position: absolute;
+  top: 7.5rem;
+  right: 1.1rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--infect);
+  border-radius: 8px;
+  background: var(--paper-raised);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.phish-loot-glyph {
+  font-family: var(--mono);
+  letter-spacing: 0.2em;
+  color: var(--infect);
+}
+
+.phish-shield {
+  position: absolute;
+  inset: -0.6rem;
+  border: 1px solid var(--calm);
+  border-radius: 16px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- tracker rail --------------------------------------------------------- */
+
+.tracker {
+  position: fixed;
+  top: 50%;
+  right: clamp(0.75rem, 2vw, 2rem);
+  transform: translateY(-50%);
+  width: var(--rail);
+  padding: 1rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.tracker-title .bi-uz {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tracker-title .bi-en {
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tracker-list {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.tracker-btn {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.2rem 1fr 0.6rem;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.35rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 200ms ease;
+}
+
+.tracker-btn:hover {
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+}
+
+.tracker-btn[data-active='true'] {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+
+.tracker-num {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.bi-tracker .bi-uz {
+  font-size: 0.82rem;
+  line-height: 1.15;
+}
+
+.bi-tracker .bi-en {
+  font-size: 0.68rem;
+  margin-top: 0.05rem;
+}
+
+.tracker-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  border: 1px solid var(--muted);
+  justify-self: end;
+}
+
+.tracker-btn[data-state='infected'] .tracker-dot {
+  background: var(--infect);
+  border-color: var(--infect);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--infect) 20%, transparent);
+}
+
+.tracker-btn[data-state='secured'] .tracker-dot {
+  background: var(--calm);
+  border-color: var(--calm);
+}
+
+/* --- presenter overlay ---------------------------------------------------- */
+
+.presenter {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, #14161b 70%, transparent);
+  z-index: 40;
+}
+
+.presenter[hidden] {
+  display: none;
+}
+
+.presenter-card {
+  min-width: min(28rem, 90vw);
+  padding: 2rem 2.25rem;
+  border-radius: 16px;
+  background: var(--paper-raised);
+  box-shadow: var(--shadow);
+}
+
+.presenter-title {
+  font-size: 1.4rem;
+}
+
+.presenter-keys {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, 1rem);
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.85rem;
+  opacity: 0;
+  transition:
+    opacity 250ms ease,
+    transform 250ms ease;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.toast[data-visible='true'] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* --- outro ---------------------------------------------------------------- */
+
+.outro {
+  min-height: 80svh;
+  display: grid;
+  align-content: center;
+  padding-block: 12vh;
+  border-top: 1px solid var(--line);
+}
+
+.outro-inner {
+  max-width: 44rem;
+}
+
+.outro-title {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+}
+
+.outro-lead {
+  margin-top: 1.75rem;
+  max-width: var(--measure);
+}
+
+.outro-habits {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  max-width: var(--measure);
+}
+
+/* --- small screens -------------------------------------------------------- */
+
+@media (max-width: 60rem) {
+  .acts {
+    padding-right: clamp(1.25rem, 5vw, 6rem);
+    padding-bottom: 6rem;
+  }
+
+  .tracker {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    transform: none;
+    border-radius: 14px 14px 0 0;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .tracker-title,
+  .bi-tracker {
+    display: none;
+  }
+
+  .tracker-list {
+    grid-auto-flow: column;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 0.25rem;
+  }
+
+  .tracker-btn {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 0.25rem;
+  }
+}
+
+/* --- reduced motion ------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* the '?reduced=1' override, so the fallback can be shown without an OS change */
+[data-reduced-motion='true'] *,
+[data-reduced-motion='true'] *::before,
+[data-reduced-motion='true'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
